@@ -62,13 +62,20 @@ const insertUKWordsInitial = `
       (5, 'Cot'),
       (6, 'Bodysuit');
 `
-
-// client.query(insertUKWordsInitial, (err, res) => {
+const deleteWashCloth = `
+    DELETE FROM usa
+    WHERE usa_word = 'Wash cloth'
+`
+const deleteFlannel = `
+    DELETE FROM uk
+    WHERE uk_word = 'Flannel'
+`
+// client.query(deleteWashCloth, (err, res) => {
 //   if (err) {
 //       console.error(err);
 //       return;
 //   }
-//   console.log('UK initial data insert successful');
+//   console.log('delete wash cloth was successful');
 //   client.end();
 // });
 

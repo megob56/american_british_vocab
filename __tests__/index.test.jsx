@@ -14,8 +14,8 @@ describe('when rendering the page', () => {
   })
   
   it('should display both h1s', () => {
-    expect(screen.getByText('American Version')).toBeVisible()
-    expect(screen.getByText('British Equivalent')).toBeVisible()
+    expect(screen.getByText('American')).toBeVisible()
+    expect(screen.getByText('British')).toBeVisible()
   })
 
   it('should display the data', () => {
