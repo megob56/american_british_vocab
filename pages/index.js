@@ -15,8 +15,6 @@ export default function Home({ wordsData }) {
 			</Head>
 
 			<main>
-        {console.log(wordsData)}
-        {console.log(typeof wordsData)}
 				<Box direction="row" gap="large" pad="medium">
 					<Box align="center" fill={true}>
 						<Box align="center">
