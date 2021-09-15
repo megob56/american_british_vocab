@@ -1,7 +1,8 @@
-import Head from "next/head";
-import { Box } from "grommet";
+import Head from "next/head"
+import { Box } from "grommet"
+import { getWords } from '../lib/index'
 
-export default function Home() {
+export default function Home({ wordsData }) {
 	return (
 		<div>
 			<Head>
@@ -14,17 +15,18 @@ export default function Home() {
 			</Head>
 
 			<main>
+        {console.log(wordsData)}
+        {console.log(typeof wordsData)}
 				<Box direction="row" gap="large" pad="medium">
 					<Box align="center" fill={true}>
 						<Box align="center">
 							<h1>American Version</h1>
               <Box pad="medium" gap="small" fill={true} background="accent-2">
-                <Box direction="row">Diaper</Box>
-                <Box direction="row">Binky</Box>
-                <Box direction="row">Stroller</Box>
-                <Box direction="row">Crib</Box>
-                <Box direction="row">Wash cloth</Box>
-                <Box direction="row">Onsie</Box>
+                {wordsData.map((word) => {
+                  return (
+                    <Box direction="row" key={`list-${word.usa_id}`}>{word.usa_word.toUpperCase()}</Box>
+                  )
+                })}
               </Box>
             </Box>
 					</Box>
@@ -32,12 +34,11 @@ export default function Home() {
 						<Box align="center">
 							<h1>British Equivalent</h1>
               <Box pad="medium" gap="small" fill={true} background="accent-3">
-                <Box direction="row">Nappy</Box>
-                <Box direction="row">NuNu</Box>
-                <Box direction="row">Pram</Box>
-                <Box direction="row">Cot</Box>
-                <Box direction="row">Flannel</Box>
-                <Box direction="row">Bodysuit</Box>
+              {wordsData.map((word) => {
+                  return (
+                    <Box direction="row" key={`list-${word.usa_id}`}>{word.uk_word.toUpperCase()}</Box>
+                  )
+                })}
               </Box>
             </Box>
 					</Box>
@@ -46,9 +47,19 @@ export default function Home() {
 
 			<footer>
 				<Box pad="xlarge" background="brand">
-					US UK babies
+					US UK translations
 				</Box>
 			</footer>
 		</div>
 	);
+}
+
+export async function getServerSideProps() {
+  const wordsData = await getWords()
+
+  return {
+    props: {
+      wordsData,
+    }
+  }
 }
